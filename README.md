@@ -2,7 +2,6 @@
 Easy file uploading and downloading for Laravel 5.
 
 ---
-[![Build Status](https://travis-ci.org/kenarkose/Transit.svg?branch=master)](https://travis-ci.org/kenarkose/Transit)
 [![Total Downloads](https://img.shields.io/packagist/dt/kenarkose/Transit.svg)](https://packagist.org/packages/kenarkose/Transit)
 [![Latest Stable Version](http://img.shields.io/packagist/v/kenarkose/Transit.svg)](https://packagist.org/packages/kenarkose/Transit)
 
