@@ -1,0 +1,7 @@
+suites:
+    transit:
+        namespace: Kenarkose\Transit
+        psr4_prefix: Kenarkose\Transit
+
+extensions:
+    - PhpSpec\Laravel\Extension\LaravelExtension

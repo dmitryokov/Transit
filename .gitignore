@@ -1,0 +1,15 @@
+*.DS_Store
+/.idea
+/app
+/bootstrap
+/config
+/database
+/node_modules
+/public
+/resources
+/storage
+/vendor
+/vfs:
+.env
+artisan
+server.php

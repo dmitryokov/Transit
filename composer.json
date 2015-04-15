@@ -1,0 +1,45 @@
+{
+    "name": "kenarkose/transit",
+    "description": "Easy file uploading and downloading for Laravel 5",
+    "license": "MIT",
+    "keywords": [
+        "kenarkose",
+        "transit",
+        "upload",
+        "download",
+        "laravel",
+        "laravel5"
+    ],
+    "version": "0.9.0",
+    "authors": [
+        {
+            "name": "Hyleeh",
+            "email": "egemen@kenarkose.com",
+            "homepage": "http://egemenkizilcan.com",
+            "role": "Developer / Designer"
+        }
+    ],
+	"require": {
+        "php": ">=5.4.0",
+		"laravel/framework": "5.0.*"
+	},
+    "require-dev": {
+        "phpspec/phpspec": "~2.1",
+        "benconstable/phpspec-laravel": "~2.0",
+        "mikey179/vfsStream": "dev-master"
+    },
+	"autoload": {
+		"psr-4": {
+			"App\\": "app/",
+            "Kenarkose\\Transit\\": "src/"
+		},
+        "files": [
+            "src/Support/helpers.php"
+        ]
+	},
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
