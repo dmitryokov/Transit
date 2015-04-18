@@ -10,5 +10,6 @@
 /vendor
 /vfs:
 .env
+.gitignore
 artisan
 server.php
