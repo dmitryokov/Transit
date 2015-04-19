@@ -16,9 +16,7 @@ class DownloadService {
      */
     public function download($file)
     {
-        if ( ! $file instanceof File
-            && (is_string($file) || is_int($file))
-        )
+        if ( ! $file instanceof File)
         {
             $modelName = $this->modelName();
 
