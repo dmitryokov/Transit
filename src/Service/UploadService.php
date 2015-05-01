@@ -176,11 +176,29 @@ class UploadService {
      */
     protected function processUpload(UploadedFile $uploadedFile)
     {
-        $movedFilePath = $this->moveUploadedFile($uploadedFile);
+        $uploadData = $this->prepareUploadData($uploadedFile);
 
-        $upload = $this->saveUpload($uploadedFile, $movedFilePath);
+        $uploadData['path'] = $this->moveUploadedFile($uploadedFile);
+
+        $upload = $this->saveUpload($uploadData);
 
         return $upload;
+    }
+
+    /**
+     * Returns an array of data for upload model
+     *
+     * @param UploadedFile $uploadedFile
+     * @return array
+     */
+    protected function prepareUploadData(UploadedFile $uploadedFile)
+    {
+        return [
+            'extension' => $uploadedFile->getExtension(),
+            'mimetype'  => $uploadedFile->getMimeType(),
+            'size'      => $uploadedFile->getSize(),
+            'name'      => $uploadedFile->getBasename('.' . $uploadedFile->getExtension()),
+        ];
     }
 
     /**
@@ -232,15 +250,12 @@ class UploadService {
     }
 
     /**
-     * @param UploadedFile $uploadedFile
-     * @param $movedFilePath
+     * @param array $uploadData
      * @return mixed
      */
-    protected function saveUpload(UploadedFile $uploadedFile, $movedFilePath)
+    protected function saveUpload(array $uploadData)
     {
-        $upload = $this->getNewUploadModel($uploadedFile);
-
-        $uploadData = $this->prepareUploadData($uploadedFile, $movedFilePath);
+        $upload = $this->getNewUploadModel();
 
         $upload->saveUploadData($uploadData);
 
@@ -264,27 +279,6 @@ class UploadService {
         }
 
         return $upload;
-    }
-
-    /**
-     * Returns an array of data for upload model
-     *
-     * @param UploadedFile $uploadedFile
-     * @param string $movedFilePath
-     * @return array
-     */
-    protected function prepareUploadData(UploadedFile $uploadedFile, $movedFilePath)
-    {
-        return [
-            'extension' => $uploadedFile->getExtension(),
-            'mimetype'  => $uploadedFile->getMimeType(),
-            'size'      => $uploadedFile->getSize(),
-            'name'      => basename(
-                $uploadedFile->getClientOriginalName(),
-                '.' . $uploadedFile->getExtension()
-            ),
-            'path'      => $movedFilePath
-        ];
     }
 
 }

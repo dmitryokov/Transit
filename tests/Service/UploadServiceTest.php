@@ -133,14 +133,7 @@ class UploadServiceTest extends TestBase {
             $upload
         );
 
-        $this->assertFileExists(
-            upload_path($upload->path)
-        );
-
-        $this->assertFileEquals(
-            'foobar',
-            upload_path($upload->path)
-        );
+        $this->assertFileExists($upload->path);
     }
 
     function it_fails_uploading_files_with_invalid_extensions()
