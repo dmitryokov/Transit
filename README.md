@@ -52,7 +52,7 @@ Installing Transit is simple.
     
     // Kenarkose\Transit\Contract\Downloadable $fileModel
     return Downloader::download($fileModel);
-    app()->make('transit.download')->download($fileModel);
+    return app()->make('transit.download')->download($fileModel);
     ```
 
     In order to register the Facades add following the facades to the end of `aliases` array in your `config/app.php` file.
