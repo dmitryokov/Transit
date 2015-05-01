@@ -49,7 +49,7 @@ class CreateModelCommand extends Command {
         $this->info('Model name: ' . $name);
 
         $this->comment(
-            'A model that extends the default Kenarkose\Transit\File'
+            'A model that extends the default Kenarkose\Transit\Model\File'
             . ' model will be created in app directory.'
         );
         $this->line('');
