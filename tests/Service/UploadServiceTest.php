@@ -200,11 +200,13 @@ class UploadServiceTest extends TestBase {
 
         try
         {
-            $this->uploadService->upload($uploadedFile);
+            $upload = $this->uploadService->upload($uploadedFile);
         } catch (Kenarkose\Transit\Exception\InvalidExtensionException $e)
         {
             $this->fail('Validation exception was thrown when validation was disabled.');
         }
+
+        $this->assertFileExists($upload->path);
     }
 
 }
