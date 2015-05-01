@@ -9,7 +9,7 @@ Easy file uploading and downloading for Laravel 5.
 ## Features
 - Clean API for uploading and downloading files
 - Automated(optional) validation while uploading files
-- Customization options for uploaded file validation.
+- Customization options for file storage, model and validation.
 - Generators for model and migration
 - A [phpunit](http://www.phpunit.de) test suite for easy development
 
