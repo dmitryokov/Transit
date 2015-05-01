@@ -17,7 +17,7 @@ class TransitCreate{{ ucfirst($table) }}Table extends Migration {
             $table->increments('id');
 
             $table->string('path');
-            $table->string('filename');
+            $table->string('name');
             $table->string('extension');
             $table->string('mimetype');
             $table->bigInteger('size')->unsigned();

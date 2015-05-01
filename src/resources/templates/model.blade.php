@@ -3,8 +3,7 @@
 namespace {{ $namespace }};
 
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
-use Kenarkose\Transit\File as TransitFile;
+use Kenarkose\Transit\Model\File as TransitFile;
 
 class {{ $name }} extends TransitFile {
 
@@ -13,6 +12,6 @@ class {{ $name }} extends TransitFile {
      *
      * @var array
      */
-    protected $fillable = ['extension', 'mimetype', 'size', 'filename'];
+    protected $fillable = ['extension', 'mimetype', 'size', 'name', 'path'];
 
 }
