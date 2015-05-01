@@ -23,6 +23,19 @@ class TestBase extends TestCase {
         ]);
     }
 
+    protected function getPackageProviders($app)
+    {
+        return ['Kenarkose\Transit\Provider\TransitServiceProvider'];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Downloader' => 'Kenarkose\Transit\Facade\Downloader',
+            'Uploader'   => 'Kenarkose\Transit\Facade\Uploader',
+        ];
+    }
+
     protected function resetDatabase()
     {
         // Relative to the testbench app folder: vendors/orchestra/testbench/src/fixture
