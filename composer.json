@@ -10,7 +10,7 @@
         "laravel",
         "laravel5"
     ],
-    "version": "0.9.1",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Hyleeh",
@@ -24,22 +24,26 @@
 		"laravel/framework": "5.0.*"
 	},
     "require-dev": {
-        "phpspec/phpspec": "~2.1",
-        "benconstable/phpspec-laravel": "~2.0",
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "~4.0",
         "mikey179/vfsStream": "dev-master"
     },
 	"autoload": {
 		"psr-4": {
-			"App\\": "app/",
             "Kenarkose\\Transit\\": "src/"
 		},
         "files": [
             "src/Support/helpers.php"
         ]
 	},
+    "autoload-dev": {
+        "classmap": [
+            "tests"
+        ]
+    },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     }
 }

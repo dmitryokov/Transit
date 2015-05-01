@@ -9,7 +9,7 @@ use Kenarkose\Transit\Service\UploadService;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '0.9.1';
+    const version = '1.0.0';
 
     /**
      * Indicates if loading of the provider is deferred.
