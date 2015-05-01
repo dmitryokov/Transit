@@ -9,10 +9,10 @@ return [
 	|
 	| Supply the full name of the Eloquent model that will be used by Transit
     | when uploading and downloading files. Any model that can be used by Transit
-    | must extend the default 'Kenarkose\Transit\File' model.
+    | must extend the default 'Kenarkose\Transit\Model\File' model.
 	|
 	*/
-    'model' => 'Kenarkose\Transit\File',
+    'model' => 'Kenarkose\Transit\Model\File',
 
 
     /*
@@ -54,7 +54,7 @@ return [
 	*/
     'extensions' => [
         'jpg', 'jpeg', 'png', 'gif', 'bmp',
-        'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
+        'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
     ],
 
 
@@ -69,7 +69,7 @@ return [
 	*/
     'mimetypes' => [
         'image/jpeg', 'image/gif', 'image/png', 'image/bmp',
-        'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
+        'text/plain', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
     ]
 
 ];

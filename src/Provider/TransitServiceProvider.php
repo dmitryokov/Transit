@@ -36,10 +36,12 @@ class TransitServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+        // This is for model and migration templates
+        // we use blade engine to generate these files
         $this->loadViewsFrom(dirname(__DIR__) . '/resources/templates', '_transit');
 
         $this->publishes([
-            dirname(__DIR__) . '/Support/config.php' => config_path('transit.php')
+            dirname(__DIR__) . '/resources/config.php' => config_path('transit.php')
         ]);
     }
 
@@ -124,24 +126,8 @@ class TransitServiceProvider extends ServiceProvider {
     {
         $this->app->bindShared('transit.download', function ()
         {
-            return $this->configureDownloadService(new DownloadService);
+            return new DownloadService;
         });
-    }
-
-    /**
-     * Configures a download service
-     *
-     * @param DownloadService $download
-     * @return DownloadService
-     */
-    protected function configureDownloadService(DownloadService $download)
-    {
-        if ($modelName = config('transit.model'))
-        {
-            $download->modelName($modelName);
-        }
-
-        return $download;
     }
 
     /**
