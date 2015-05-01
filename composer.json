@@ -21,13 +21,13 @@
     ],
 	"require": {
         "php": ">=5.4.0",
-		"laravel/framework": "5.0.*",
-        "mockery/mockery": "0.9.*"
+		"laravel/framework": "5.0.*"
 	},
     "require-dev": {
         "orchestra/testbench": "~3.0",
         "phpunit/phpunit": "~4.0",
-        "mikey179/vfsStream": "~1.5"
+        "mikey179/vfsStream": "~1.5",
+        "mockery/mockery": "0.9.*"
     },
 	"autoload": {
 		"psr-4": {
