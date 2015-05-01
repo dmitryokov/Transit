@@ -3,52 +3,37 @@
 namespace Kenarkose\Transit\Service;
 
 
-use InvalidArgumentException;
-use Kenarkose\Transit\File;
+use Kenarkose\Transit\Contract\Downloadable;
 
 class DownloadService {
 
-    use Configurable;
-
     /**
-     * @param File|int $file
+     * @param Downloadable $file
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function download($file)
+    public function download(Downloadable $file)
     {
-        if ( ! $file instanceof File)
-        {
-            $modelName = $this->modelName();
-
-            $file = $modelName::findOrFail($file);
-        }
-
-        if ( ! $file instanceof File)
-        {
-            throw new InvalidArgumentException('Argument for download can only be a valid key or an instance of Kenarkose\Transit\File.');
-        }
-
-        return $this->downloadResponse($file);
+        return response()->download(
+            $file->getFilePath(),
+            $file->getFileName() . '.' . $file->getFileExtension(),
+            $this->makeDownloadHeaders($file)
+        );
     }
 
     /**
-     * @param File $file
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @param Downloadable $file
+     * @return array
      */
-    protected function downloadResponse(File $file)
+    protected function makeDownloadHeaders(Downloadable $file)
     {
-        return response()->download(
-            $file->getPath(),
-            $file->getFileName(),
-            [
-                'Content-Description'       => 'File Transfer',
-                'Content-Type'              => $file->getMimeType(),
-                'Content-Transfer-Encoding' => 'binary',
-                'Expires'                   => 0,
-                'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
-                'Pragma'                    => 'public',
-                'Content-Length'            => $file->getSize()
-            ]
-        );
+        return [
+            'Content-Description'       => 'File Transfer',
+            'Content-Type'              => $file->getFileMimeType(),
+            'Content-Transfer-Encoding' => 'binary',
+            'Expires'                   => 0,
+            'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+            'Pragma'                    => 'public',
+            'Content-Length'            => $file->getFileSize()
+        ];
     }
 }

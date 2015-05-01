@@ -3,17 +3,15 @@
 namespace Kenarkose\Transit\Service;
 
 
+use Kenarkose\Transit\Contract\Uploadable;
 use Kenarkose\Transit\Exception\InvalidExtensionException;
 use Kenarkose\Transit\Exception\InvalidMimeTypeException;
 use Kenarkose\Transit\Exception\InvalidUploadException;
 use Kenarkose\Transit\Exception\MaxFileSizeExceededException;
-use Kenarkose\Transit\File;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadService {
-
-    use Configurable;
 
     /**
      * @var bool
@@ -30,20 +28,25 @@ class UploadService {
      */
     protected $allowedExtensions = [
         'jpg', 'jpeg', 'png', 'gif', 'bmp',
-        'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
+        'txt', 'pdf','doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
     ];
 
     protected $allowedMimeTypes = [
         'image/jpeg', 'image/gif', 'image/png', 'image/bmp',
-        'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
+        'text/plain', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
     ];
+
+    /**
+     * @var string
+     */
+    protected $modelName = 'Kenarkose\Transit\Model\File';
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->maxUploadSize = UploadedFile::getMaxFilesize();
+        $this->maxUploadSize(UploadedFile::getMaxFilesize());
     }
 
     /**
@@ -108,6 +111,20 @@ class UploadService {
     }
 
     /**
+     * @param string
+     * @return string
+     */
+    public function modelName($name = null)
+    {
+        if (func_num_args() === 0)
+        {
+            return $this->modelName;
+        }
+
+        return $this->modelName = (string)$name;
+    }
+
+    /**
      * Uploads a file
      *
      * @param UploadedFile $uploadedFile
@@ -115,40 +132,12 @@ class UploadService {
      */
     public function upload(UploadedFile $uploadedFile)
     {
-        $this->validateUploadedFile($uploadedFile);
+        if ($this->validatesUploadedFile())
+        {
+            $this->validateUploadedFile($uploadedFile);
+        }
 
         return $this->processUpload($uploadedFile);
-    }
-
-    /**
-     * @param UploadedFile $uploadedFile
-     * @param array $options
-     * @return Upload
-     */
-    protected function processUpload(UploadedFile $uploadedFile, array $options = [])
-    {
-        $upload = $this->getNewUploadModel($uploadedFile);
-
-        $upload->path = $this->moveUploadedFile($uploadedFile);
-
-        $upload->save();
-
-        return $upload;
-    }
-
-    /**
-     * Creates a new upload model
-     *
-     * @param UploadedFile $uploadedFile
-     * @return mixed
-     */
-    protected function getNewUploadModel(UploadedFile $uploadedFile)
-    {
-        $uploadModel = $this->modelName();
-
-        $upload = new $uploadModel;
-
-        return $this->setUploadAttributes($upload, $uploadedFile);
     }
 
     /**
@@ -164,7 +153,6 @@ class UploadService {
         {
             throw new InvalidUploadException($uploadedFile->getErrorMessage());
         }
-
 
         if ($this->maxUploadSize() < $uploadedFile->getSize())
         {
@@ -183,23 +171,16 @@ class UploadService {
     }
 
     /**
-     * Returns an array of attributes of the uploaded file
-     *
-     * @param File $upload
      * @param UploadedFile $uploadedFile
-     * @return array
+     * @return Upload
      */
-    protected function setUploadAttributes(File $upload, UploadedFile $uploadedFile)
+    protected function processUpload(UploadedFile $uploadedFile)
     {
-        return $upload->fill([
-            'extension' => $uploadedFile->getClientOriginalExtension(),
-            'mimetype'  => $uploadedFile->getMimeType(),
-            'size'      => $uploadedFile->getSize(),
-            'filename'  => basename(
-                $uploadedFile->getClientOriginalName(),
-                '.' . $uploadedFile->getClientOriginalExtension()
-            )
-        ]);
+        $movedFilePath = $this->moveUploadedFile($uploadedFile);
+
+        $upload = $this->saveUpload($uploadedFile, $movedFilePath);
+
+        return $upload;
     }
 
     /**
@@ -248,6 +229,62 @@ class UploadService {
                 throw new RuntimeException('Directory (' . $uploadPath . ') could not be created.');
             }
         }
+    }
+
+    /**
+     * @param UploadedFile $uploadedFile
+     * @param $movedFilePath
+     * @return mixed
+     */
+    protected function saveUpload(UploadedFile $uploadedFile, $movedFilePath)
+    {
+        $upload = $this->getNewUploadModel($uploadedFile);
+
+        $uploadData = $this->prepareUploadData($uploadedFile, $movedFilePath);
+
+        $upload->saveUploadData($uploadData);
+
+        return $upload;
+    }
+
+    /**
+     * Creates a new upload model
+     *
+     * @return mixed
+     */
+    protected function getNewUploadModel()
+    {
+        $uploadModel = $this->modelName();
+
+        $upload = new $uploadModel;
+
+        if ( ! $upload instanceof Uploadable)
+        {
+            throw new RuntimeException('The upload model must implement the "Kenarkose\Transit\Contract\Uploadable" interface.');
+        }
+
+        return $upload;
+    }
+
+    /**
+     * Returns an array of data for upload model
+     *
+     * @param UploadedFile $uploadedFile
+     * @param string $movedFilePath
+     * @return array
+     */
+    protected function prepareUploadData(UploadedFile $uploadedFile, $movedFilePath)
+    {
+        return [
+            'extension' => $uploadedFile->getClientOriginalExtension(),
+            'mimetype'  => $uploadedFile->getMimeType(),
+            'size'      => $uploadedFile->getSize(),
+            'name'      => basename(
+                $uploadedFile->getClientOriginalName(),
+                '.' . $uploadedFile->getClientOriginalExtension()
+            ),
+            'path'      => $movedFilePath
+        ];
     }
 
 }
