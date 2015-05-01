@@ -2,6 +2,9 @@
 
 class DownloadableTest extends TestBase {
 
+    protected $modelAttributes;
+    protected $model;
+
     public function setUp()
     {
         parent::setUp();

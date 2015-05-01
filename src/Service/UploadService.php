@@ -28,7 +28,7 @@ class UploadService {
      */
     protected $allowedExtensions = [
         'jpg', 'jpeg', 'png', 'gif', 'bmp',
-        'txt', 'pdf','doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
+        'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
     ];
 
     protected $allowedMimeTypes = [
@@ -276,12 +276,12 @@ class UploadService {
     protected function prepareUploadData(UploadedFile $uploadedFile, $movedFilePath)
     {
         return [
-            'extension' => $uploadedFile->getClientOriginalExtension(),
+            'extension' => $uploadedFile->getExtension(),
             'mimetype'  => $uploadedFile->getMimeType(),
             'size'      => $uploadedFile->getSize(),
             'name'      => basename(
                 $uploadedFile->getClientOriginalName(),
-                '.' . $uploadedFile->getClientOriginalExtension()
+                '.' . $uploadedFile->getExtension()
             ),
             'path'      => $movedFilePath
         ];
