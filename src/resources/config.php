@@ -4,12 +4,23 @@ return [
 
     /*
 	|--------------------------------------------------------------------------
+	| Upload Path
+	|--------------------------------------------------------------------------
+	|
+	| You may define a custom upload path for your files here. Supply the
+    | upload path relative to base path.
+	|
+	*/
+    'upload_path' => 'public/upload',
+
+    /*
+	|--------------------------------------------------------------------------
 	| File Model
 	|--------------------------------------------------------------------------
 	|
 	| Supply the full name of the Eloquent model that will be used by Transit
-    | when uploading and downloading files. Any model that can be used by Transit
-    | must extend the default 'Kenarkose\Transit\Model\File' model.
+    | when uploading files. Any model that can be used by Transit Upload Service
+    | must implement "Kenarkose\Transit\Contract\Uploadable" interface.
 	|
 	*/
     'model' => 'Kenarkose\Transit\Model\File',
