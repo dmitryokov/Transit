@@ -21,7 +21,8 @@
     ],
 	"require": {
         "php": ">=5.4.0",
-		"laravel/framework": "5.0.*"
+		"laravel/framework": "5.0.*",
+        "mockery/mockery": "0.9.*"
 	},
     "require-dev": {
         "orchestra/testbench": "~3.0",
@@ -40,6 +41,9 @@
         "classmap": [
             "tests"
         ]
+    },
+    "suggest": {
+        "kenarkose/ownable": "Allows ownership for Eloquent models on Laravel 5."
     },
     "extra": {
         "branch-alias": {
