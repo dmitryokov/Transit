@@ -39,7 +39,7 @@ Installing Transit is simple.
     ),
     ```
     
-3. In order to persist the uploaded file information, you have to create a migration for the 'Kenarkose\Transit\Model\File' model, which is the default model used for database persistence. To do so, use the following command.
+3. In order to persist the uploaded file information, you have to create a migration for the 'Kenarkose\Transit\File\File' model, which is the default model used for database persistence. To do so, use the following command.
     ```bash
         php artisan transit:migration
     ```
@@ -90,7 +90,7 @@ Uploader::modelName('Custom\Uploadable\Model');
 app()->make('transit.upload')->modelName('Custom\Uploadable\Model');
 ```
 You may use separate models for Upload and Download services as well as deleting files.
-But you must implement `Kenarkose\Transit\Contract\Uploadable`, `Kenarkose\Transit\Contract\Downloadable` and `Kenarkose\Transit\Contract\Deletable` interfaces respectively. Furthermore, you may use `Kenarkose\Transit\Model\Uploadable`, `Kenarkose\Transit\Model\Downloadable` and `Kenarkose\Transit\Model\Deletable` traits for providing required functionality to Eloquent models.
+But you must implement `Kenarkose\Transit\Contract\Uploadable`, `Kenarkose\Transit\Contract\Downloadable` and `Kenarkose\Transit\Contract\Deletable` interfaces respectively. Furthermore, you may use `Kenarkose\Transit\File\Uploadable`, `Kenarkose\Transit\File\Downloadable` and `Kenarkose\Transit\File\Deletable` traits for providing required functionality to Eloquent models.
 
 ## License
 Transit is released under [MIT License](https://github.com/kenarkose/Synthesizer/blob/master/LICENSE).
