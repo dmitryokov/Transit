@@ -104,7 +104,7 @@ class UploadServiceTest extends TestBase {
     function it_gets_and_sets_model_name()
     {
         $this->assertEquals(
-            'Kenarkose\Transit\Model\File',
+            'Kenarkose\Transit\File\File',
             $this->uploadService->modelName()
         );
 

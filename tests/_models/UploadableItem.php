@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Kenarkose\Transit\Contract\Uploadable as UploadableContract;
-use Kenarkose\Transit\Model\Uploadable;
+use Kenarkose\Transit\File\Uploadable;
 
 class UploadableItem extends Eloquent implements UploadableContract {
 

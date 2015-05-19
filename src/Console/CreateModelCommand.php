@@ -63,7 +63,7 @@ class CreateModelCommand extends Command {
         } else
         {
             $this->error(
-                "Coudn't create model.\n Check the write permissions" .
+                "Couldn't create model.\n Check the write permissions" .
                 " within the app directory."
             );
         }

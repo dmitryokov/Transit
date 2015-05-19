@@ -11,10 +11,10 @@ class DownloadableTest extends TestBase {
 
         $this->modelAttributes = [
             'extension' => 'txt',
-            'mimetype' => 'text/plain',
-            'size' => 1337,
-            'name' => 'test',
-            'path' => 'path/to/test.txt'
+            'mimetype'  => 'text/plain',
+            'size'      => 1337,
+            'name'      => 'test',
+            'path'      => 'path/to/test.txt'
         ];
 
         $this->model = DownloadableItem::create($this->modelAttributes);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kenarkose\Transit\Model;
+namespace Kenarkose\Transit\File;
 
 
 trait Downloadable {

@@ -61,7 +61,7 @@ class CreateMigrationCommand extends Command {
         } else
         {
             $this->error(
-                "Coudn't create migration.\n Check the write permissions" .
+                "Couldn't create migration.\n Check the write permissions" .
                 " within the database/migrations directory."
             );
         }

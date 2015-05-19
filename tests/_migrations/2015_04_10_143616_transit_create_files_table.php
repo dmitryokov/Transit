@@ -11,7 +11,7 @@ class TransitCreateFilesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('files', function(Blueprint $table)
+        Schema::create('files', function (Blueprint $table)
         {
             $table->increments('id');
 

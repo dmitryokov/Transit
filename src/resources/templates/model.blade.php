@@ -3,7 +3,7 @@
 namespace {{ $namespace }};
 
 
-use Kenarkose\Transit\Model\File as TransitFile;
+use Kenarkose\Transit\File\File as TransitFile;
 
 class {{ $name }} extends TransitFile {
 

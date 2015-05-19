@@ -39,7 +39,7 @@ class UploadService {
     /**
      * @var string
      */
-    protected $modelName = 'Kenarkose\Transit\Model\File';
+    protected $modelName = 'Kenarkose\Transit\File\File';
 
     /**
      * Constructor

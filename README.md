@@ -9,8 +9,9 @@ Easy file uploading and downloading for Laravel 5.
 ## Features
 - Clean API for uploading and downloading files
 - Automated(optional) validation while uploading files
-- Customization options for file storage, model and validation.
+- Customization options for file storage, model and validation
 - Generators for model and migration
+- Deleting uploaded files
 - A [phpunit](http://www.phpunit.de) test suite for easy development
 
 ## Installation
@@ -21,7 +22,7 @@ Installing Transit is simple.
     ```js
     {
         "require": {
-            "kenarkose/transit": "1.0.*"
+            "kenarkose/transit": "1.1.*"
         }
     }
     ```
@@ -88,8 +89,8 @@ Uploader::modelName('Custom\Uploadable\Model');
 // or
 app()->make('transit.upload')->modelName('Custom\Uploadable\Model');
 ```
-You may use separate models for Upload and Download services.
-But you must implement `Kenarkose\Transit\Contract\Uploadable` and `Kenarkose\Transit\Contract\Downloadable` interfaces respectively. Furthermore, you may use `Kenarkose\Transit\Model\Uploadable` and `Kenarkose\Transit\Model\Downloadable` traits for providing required functionality to Eloquent models.
+You may use separate models for Upload and Download services as well as deleting files.
+But you must implement `Kenarkose\Transit\Contract\Uploadable`, `Kenarkose\Transit\Contract\Downloadable` and `Kenarkose\Transit\Contract\Deletable` interfaces respectively. Furthermore, you may use `Kenarkose\Transit\Model\Uploadable`, `Kenarkose\Transit\Model\Downloadable` and `Kenarkose\Transit\Model\Deletable` traits for providing required functionality to Eloquent models.
 
 ## License
 Transit is released under [MIT License](https://github.com/kenarkose/Synthesizer/blob/master/LICENSE).

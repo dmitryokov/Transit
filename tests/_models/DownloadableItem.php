@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Kenarkose\Transit\Contract\Downloadable as DownloadableContract;
-use Kenarkose\Transit\Model\Downloadable;
+use Kenarkose\Transit\File\Downloadable;
 
 class DownloadableItem extends Eloquent implements DownloadableContract {
 

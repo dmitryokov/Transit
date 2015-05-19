@@ -39,7 +39,7 @@ class TestBase extends TestCase {
     protected function resetDatabase()
     {
         // Relative to the testbench app folder: vendors/orchestra/testbench/src/fixture
-        $migrationsPath = 'tests/migrations';
+        $migrationsPath = 'tests/_migrations';
         $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
 
         // Migrate
