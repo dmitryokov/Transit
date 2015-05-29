@@ -5,11 +5,10 @@ namespace Kenarkose\Transit\Provider;
 
 use Illuminate\Support\ServiceProvider;
 use Kenarkose\Transit\Service\DownloadService;
-use Kenarkose\Transit\Service\UploadService;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.1.1';
+    const version = '1.1.2';
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -77,46 +76,10 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerUploadService()
     {
-        $this->app->bindShared('transit.upload', function ()
-        {
-            return $this->configureUploadService(new UploadService);
-        });
-    }
-
-    /**
-     * Configures an upload service instance
-     *
-     * @param UploadService $upload
-     * @return UploadService
-     */
-    protected function configureUploadService(UploadService $upload)
-    {
-        if ($validates = config('transit.validates'))
-        {
-            $upload->validatesUploadedFile($validates);
-        }
-
-        if ($size = config('transit.max_size'))
-        {
-            $upload->maxUploadSize($size);
-        }
-
-        if ($extensions = config('transit.extensions'))
-        {
-            $upload->allowedExtensions($extensions);
-        }
-
-        if ($mimes = config('transit.mimetypes'))
-        {
-            $upload->allowedMimeTypes($mimes);
-        }
-
-        if ($modelName = config('transit.model'))
-        {
-            $upload->modelName($modelName);
-        }
-
-        return $upload;
+        $this->app->singleton(
+            'transit.upload',
+            'Kenarkose\Transit\Service\UploadService'
+        );
     }
 
     /**
@@ -124,10 +87,10 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerDownloadService()
     {
-        $this->app->bindShared('transit.download', function ()
-        {
-            return new DownloadService;
-        });
+        $this->app->singleton(
+            'transit.download',
+            'Kenarkose\Transit\Service\DownloadService'
+        );
     }
 
     /**

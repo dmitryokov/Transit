@@ -3,6 +3,7 @@
 namespace Kenarkose\Transit\Service;
 
 
+use Illuminate\Config\Repository;
 use Kenarkose\Transit\Contract\Uploadable;
 use Kenarkose\Transit\Exception\InvalidExtensionException;
 use Kenarkose\Transit\Exception\InvalidMimeTypeException;
@@ -12,6 +13,11 @@ use RuntimeException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadService {
+
+    /**
+     * @var Repository
+     */
+    protected $config;
 
     /**
      * @var bool
@@ -43,10 +49,36 @@ class UploadService {
 
     /**
      * Constructor
+     *
+     * @param Repository $config
      */
-    public function __construct()
+    public function __construct(Repository $config)
     {
-        $this->maxUploadSize(UploadedFile::getMaxFilesize());
+        $this->config = $config;
+
+        if ($validates = $this->config->get('transit.validates'))
+        {
+            $this->validatesUploadedFile($validates);
+        }
+
+        if ($extensions = $this->config->get('transit.extensions'))
+        {
+            $this->allowedExtensions($extensions);
+        }
+
+        if ($mimes = $this->config->get('transit.mimetypes'))
+        {
+            $this->allowedMimeTypes($mimes);
+        }
+
+        if ($modelName = $this->config->get('transit.model'))
+        {
+            $this->modelName($modelName);
+        }
+
+        $size = $this->config->get('transit.max_size', UploadedFile::getMaxFilesize());
+
+        $this->maxUploadSize($size);
     }
 
     /**
