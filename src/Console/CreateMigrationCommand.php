@@ -52,17 +52,17 @@ class CreateMigrationCommand extends Command {
         );
         $this->line('');
 
-        $this->info("Creating migration...");
+        $this->info('Creating migration...');
         if ($this->createMigration($table))
         {
-            $this->info("Migration successfully created!");
+            $this->info('Migration successfully created!');
 
             $this->promptMigrate();
         } else
         {
             $this->error(
-                "Couldn't create migration.\n Check the write permissions" .
-                " within the database/migrations directory."
+                'Couldn\'t create migration.\n Check the write permissions' .
+                ' within the database/migrations directory.'
             );
         }
     }

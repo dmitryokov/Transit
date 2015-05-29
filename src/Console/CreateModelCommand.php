@@ -54,17 +54,17 @@ class CreateModelCommand extends Command {
         );
         $this->line('');
 
-        $this->info("Creating model...");
+        $this->info('Creating model...');
         if ($this->createModel($name))
         {
-            $this->info("Model successfully created!");
+            $this->info('Model successfully created!');
 
             $this->promptMigration($name);
         } else
         {
             $this->error(
-                "Couldn't create model.\n Check the write permissions" .
-                " within the app directory."
+                'Couldn\'t create model.\n Check the write permissions' .
+                ' within the app directory.'
             );
         }
     }
