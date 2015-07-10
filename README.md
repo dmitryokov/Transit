@@ -7,6 +7,7 @@ Easy file uploading and downloading for Laravel 5.
 [![Latest Stable Version](http://img.shields.io/packagist/v/kenarkose/Transit.svg)](https://packagist.org/packages/kenarkose/Transit)
 
 ## Features
+- Compatible with Laravel 5.0 and 5.1
 - Clean API for uploading and downloading files
 - Automated(optional) validation while uploading files
 - Customization options for file storage, model and validation
