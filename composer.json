@@ -42,6 +42,7 @@
         ]
     },
     "suggest": {
+        "laravel/framework": "This package requires Laravel 5.",
         "kenarkose/ownable": "Allows ownership for Eloquent models on Laravel 5."
     },
     "extra": {
