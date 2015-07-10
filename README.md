@@ -5,7 +5,7 @@ Easy file uploading and downloading for Laravel 5.
 [![Build Status](https://travis-ci.org/kenarkose/Transit.svg?branch=master)](https://travis-ci.org/kenarkose/Transit)
 [![Total Downloads](https://poser.pugx.org/kenarkose/Transit/downloads)](https://packagist.org/packages/kenarkose/Transit)
 [![Latest Stable Version](https://poser.pugx.org/kenarkose/Transit/version)](https://packagist.org/packages/kenarkose/Transit)
-[![License](https://poser.pugx.org/kenarkose/Transit/license)](https://packagist.org/packages/phpunit/phpunit)
+[![License](https://poser.pugx.org/kenarkose/Transit/license)](https://packagist.org/packages/kenarkose/Transit)
 ## Features
 - Compatible with Laravel 5.0 and 5.1
 - Clean API for uploading and downloading files
