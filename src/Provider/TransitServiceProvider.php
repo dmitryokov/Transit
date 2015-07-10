@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.1.4';
+    const version = '1.1.3';
 
     /**
      * Indicates if loading of the provider is deferred.
