@@ -4,11 +4,10 @@ namespace Kenarkose\Transit\Provider;
 
 
 use Illuminate\Support\ServiceProvider;
-use Kenarkose\Transit\Service\DownloadService;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.1.2';
+    const version = '1.1.3';
 
     /**
      * Indicates if loading of the provider is deferred.
