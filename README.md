@@ -94,4 +94,4 @@ You may use separate models for Upload and Download services as well as deleting
 But you must implement `Kenarkose\Transit\Contract\Uploadable`, `Kenarkose\Transit\Contract\Downloadable` and `Kenarkose\Transit\Contract\Deletable` interfaces respectively. Furthermore, you may use `Kenarkose\Transit\File\Uploadable`, `Kenarkose\Transit\File\Downloadable` and `Kenarkose\Transit\File\Deletable` traits for providing required functionality to Eloquent models.
 
 ## License
-Transit is released under [MIT License](https://github.com/kenarkose/Files/blob/master/LICENSE).
+Transit is released under [MIT License](https://github.com/kenarkose/Transit/blob/master/LICENSE).
