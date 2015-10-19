@@ -220,7 +220,7 @@ class UploadService {
             'extension' => $uploadedFile->getClientOriginalExtension(),
             'mimetype'  => $uploadedFile->getMimeType(),
             'size'      => $uploadedFile->getSize(),
-            'name'      => $uploadedFile->getBasename('.' . $uploadedFile->getClientOriginalExtension()),
+            'name'      => $uploadedFile->getClientOriginalName(),
         ];
     }
 
