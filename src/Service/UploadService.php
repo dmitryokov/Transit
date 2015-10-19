@@ -184,7 +184,7 @@ class UploadService {
 
         if ( ! in_array(strtolower($uploadedFile->getClientOriginalExtension()), $this->allowedExtensions()))
         {
-            throw new InvalidExtensionException('Files with extension (' . $uploadedFile->getExtension() . ') are not allowed');
+            throw new InvalidExtensionException('Files with extension (' . $uploadedFile->getClientOriginalExtension() . ') are not allowed');
         }
 
         if ( ! in_array($uploadedFile->getMimeType(), $this->allowedMimeTypes()))
@@ -217,10 +217,10 @@ class UploadService {
     protected function prepareUploadData(UploadedFile $uploadedFile)
     {
         return [
-            'extension' => $uploadedFile->getExtension(),
+            'extension' => $uploadedFile->getClientOriginalExtension(),
             'mimetype'  => $uploadedFile->getMimeType(),
             'size'      => $uploadedFile->getSize(),
-            'name'      => $uploadedFile->getBasename('.' . $uploadedFile->getExtension()),
+            'name'      => $uploadedFile->getBasename('.' . $uploadedFile->getClientOriginalExtension()),
         ];
     }
 
