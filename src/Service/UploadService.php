@@ -22,7 +22,7 @@ class UploadService {
     /**
      * @var bool
      */
-    protected $validatesUploadedFile = true;
+    protected $validatesUploadedFile;
 
     /**
      * @var int
@@ -32,20 +32,13 @@ class UploadService {
     /**
      * @var array
      */
-    protected $allowedExtensions = [
-        'jpg', 'jpeg', 'png', 'gif', 'bmp',
-        'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
-    ];
-
-    protected $allowedMimeTypes = [
-        'image/jpeg', 'image/gif', 'image/png', 'image/bmp',
-        'text/plain', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
-    ];
+    protected $allowedExtensions;
+    protected $allowedMimeTypes;
 
     /**
      * @var string
      */
-    protected $modelName = 'Kenarkose\Transit\File\File';
+    protected $modelName;
 
     /**
      * Constructor
@@ -56,25 +49,23 @@ class UploadService {
     {
         $this->config = $config;
 
-        if ($validates = $this->config->get('transit.validates'))
-        {
-            $this->validatesUploadedFile($validates);
-        }
+        $this->validatesUploadedFile(
+            $this->config->get('transit.validates', true)
+        );
 
-        if ($extensions = $this->config->get('transit.extensions'))
-        {
-            $this->allowedExtensions($extensions);
-        }
+        $this->allowedExtensions($this->config->get('transit.extensions', [
+            'jpg', 'jpeg', 'png', 'gif', 'bmp',
+            'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
+        ]));
 
-        if ($mimes = $this->config->get('transit.mimetypes'))
-        {
-            $this->allowedMimeTypes($mimes);
-        }
+        $this->allowedMimeTypes($this->config->get('transit.mimetypes', [
+            'image/jpeg', 'image/gif', 'image/png', 'image/bmp',
+            'text/plain', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
+        ]));
 
-        if ($modelName = $this->config->get('transit.model'))
-        {
-            $this->modelName($modelName);
-        }
+        $this->modelName(
+            $this->config->get('transit.model',
+                'Kenarkose\Transit\File\File'));
 
         $size = $this->config->get('transit.max_size', UploadedFile::getMaxFilesize());
 
@@ -191,14 +182,14 @@ class UploadService {
             throw new MaxFileSizeExceededException('Uploaded file exceeded maximum allowed upload size.');
         }
 
-        if ( ! in_array($uploadedFile->getExtension(), $this->allowedExtensions()))
+        if ( ! in_array(strtolower($uploadedFile->getClientOriginalExtension()), $this->allowedExtensions()))
         {
             throw new InvalidExtensionException('Files with extension (' . $uploadedFile->getExtension() . ') are not allowed');
         }
 
         if ( ! in_array($uploadedFile->getMimeType(), $this->allowedMimeTypes()))
         {
-            throw new InvalidMimeTypeException('Files with mime type (' . $uploadedFile->getMimeType() . ' are not allowed');
+            throw new InvalidMimeTypeException('Files with mime type (' . $uploadedFile->getMimeType() . ') are not allowed');
         }
     }
 
