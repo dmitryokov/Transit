@@ -8,10 +8,10 @@ return [
 	|--------------------------------------------------------------------------
 	|
 	| You may define a custom upload path for your files here. Supply the
-    | upload path relative to base path.
+    | upload path relative to public path.
 	|
 	*/
-    'upload_path' => 'public/upload',
+    'upload_path' => 'upload',
 
     /*
 	|--------------------------------------------------------------------------

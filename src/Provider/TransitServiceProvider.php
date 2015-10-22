@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.2.5';
+    const version = '1.3.0';
 
     /**
      * Registers the service provider
@@ -45,7 +45,7 @@ class TransitServiceProvider extends ServiceProvider {
         $this->app['path.upload'] = $this->app->share(function ()
         {
             return ($configuredPath = config('transit.upload_path'))
-                ? base_path($configuredPath)
+                ? public_path($configuredPath)
                 : public_path('upload');
         });
     }
@@ -58,7 +58,7 @@ class TransitServiceProvider extends ServiceProvider {
         $this->app['path.uploaded_asset'] = $this->app->share(function ()
         {
             return ($configuredPath = config('transit.upload_path'))
-                ? '/' . trim($configuredPath, '/') . '/'
+                ? $configuredPath
                 : '/upload/';
         });
     }
