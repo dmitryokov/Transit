@@ -24,7 +24,7 @@ if ( ! function_exists('uploaded_asset'))
      */
     function uploaded_asset($path)
     {
-        return asset(app()->make('path.uploaded_asset') . $path);
+        return asset(app()->make('path.uploaded_asset') . '/' . $path);
     }
 }
 

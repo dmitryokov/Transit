@@ -23,7 +23,7 @@ return [
     | must implement "Kenarkose\Transit\Contract\Uploadable" interface.
 	|
 	*/
-    'model' => 'Kenarkose\Transit\File\File',
+    'model'       => 'Kenarkose\Transit\File\File',
 
 
     /*
@@ -36,7 +36,7 @@ return [
     | false. See the default validation parameters below.
 	|
 	*/
-    'validates' => true,
+    'validates'   => true,
 
 
     /*
@@ -51,7 +51,7 @@ return [
     | Supply this value in bytes.
 	|
 	*/
-    'max_size' => 10485760,
+    'max_size'    => 10485760,
 
 
     /*
@@ -63,7 +63,7 @@ return [
     | validate file extensions allowed for upload.
 	|
 	*/
-    'extensions' => [
+    'extensions'  => [
         'jpg', 'jpeg', 'png', 'gif', 'bmp',
         'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
     ],
@@ -78,9 +78,12 @@ return [
     | validates file mime types allowed for upload.
 	|
 	*/
-    'mimetypes' => [
+    'mimetypes'   => [
         'image/jpeg', 'image/gif', 'image/png', 'image/bmp',
-        'text/plain', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'
+        'text/plain', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ]
 
 ];
