@@ -7,14 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.2.4';
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
+    const version = '1.2.5';
 
     /**
      * Registers the service provider
@@ -42,20 +35,6 @@ class TransitServiceProvider extends ServiceProvider {
         $this->publishes([
             dirname(__DIR__) . '/resources/config.php' => config_path('transit.php')
         ]);
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [
-            'path.upload',
-            'transit.upload',
-            'transit.download'
-        ];
     }
 
     /**
