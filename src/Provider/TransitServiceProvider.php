@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.2.3';
+    const version = '1.2.4';
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -22,6 +22,7 @@ class TransitServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->registerUploadPath();
+        $this->registerAssetPath();
 
         $this->registerUploadService();
         $this->registerDownloadService();
@@ -71,6 +72,19 @@ class TransitServiceProvider extends ServiceProvider {
     }
 
     /**
+     * Registers the asset path
+     */
+    protected function registerAssetPath()
+    {
+        $this->app['path.uploaded_asset'] = $this->app->share(function ()
+        {
+            return ($configuredPath = config('transit.upload_path'))
+                ? '/' . trim($configuredPath, '/') . '/'
+                : '/upload/';
+        });
+    }
+
+    /**
      * Registers upload service
      */
     protected function registerUploadService()
@@ -98,8 +112,8 @@ class TransitServiceProvider extends ServiceProvider {
     protected function registerCommands()
     {
         $this->commands([
-           'Kenarkose\Transit\Console\CreateModelCommand',
-           'Kenarkose\Transit\Console\CreateMigrationCommand'
+            'Kenarkose\Transit\Console\CreateModelCommand',
+            'Kenarkose\Transit\Console\CreateMigrationCommand'
         ]);
     }
 

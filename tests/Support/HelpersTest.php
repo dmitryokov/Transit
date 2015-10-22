@@ -12,6 +12,15 @@ class HelpersTest extends TestBase {
     }
 
     /** @test */
+    function it_registers_uploaded_asset_helper()
+    {
+        $this->assertEquals(
+            asset(app()->make('path.uploaded_asset') . 'foo.jpg'),
+            uploaded_asset('foo.jpg')
+        );
+    }
+
+    /** @test */
     function it_registers_allowed_extensions_helper()
     {
         $this->assertEquals(

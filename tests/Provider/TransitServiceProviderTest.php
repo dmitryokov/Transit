@@ -10,6 +10,12 @@ class TransitServiceProviderTest extends TestBase {
     }
 
     /** @test */
+    function it_registers_uploaded_asset_path()
+    {
+        $this->assertInternalType('string', app('path.uploaded_asset'));
+    }
+
+    /** @test */
     function it_registers_upload_service()
     {
         $this->assertInstanceOf(

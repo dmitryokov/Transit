@@ -14,6 +14,20 @@ if ( ! function_exists('upload_path'))
     }
 }
 
+if ( ! function_exists('uploaded_asset'))
+{
+    /**
+     * Get the asset path for uploaded file.
+     *
+     * @param string $path
+     * @return string
+     */
+    function uploaded_asset($path)
+    {
+        return asset(app()->make('path.uploaded_asset') . $path);
+    }
+}
+
 if ( ! function_exists('allowed_extensions'))
 {
     /**
