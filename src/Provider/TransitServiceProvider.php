@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.3.1';
+    const version = '1.3.2';
 
     /**
      * Registers the service provider
@@ -59,7 +59,7 @@ class TransitServiceProvider extends ServiceProvider {
         {
             return ($configuredPath = config('transit.upload_path'))
                 ? $configuredPath
-                : '/upload/';
+                : '/upload';
         });
     }
 
