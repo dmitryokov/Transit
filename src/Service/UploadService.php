@@ -232,8 +232,9 @@ class UploadService {
     {
         list($fullPath, $relativePath) = $this->getUploadPath();
 
-        $filename = md5(uniqid(mt_rand(), true))
-            . '.' . $uploadedFile->getClientOriginalExtension();
+        $filename = $this->getNewFileName(
+            $uploadedFile->getClientOriginalExtension()
+        );
 
         $uploadedFile->move($fullPath, $filename);
 
@@ -241,11 +242,22 @@ class UploadService {
     }
 
     /**
+     * Creates a new random file name
+     *
+     * @param string $extension
+     * @return string
+     */
+    public function getNewFileName($extension)
+    {
+        return md5(uniqid(mt_rand(), true)) . '.' . $extension;
+    }
+
+    /**
      * Returns the current upload directory
      *
      * @return string
      */
-    protected function getUploadPath()
+    public function getUploadPath()
     {
         $relativePath = date('Y/m');
         $fullPath = upload_path($relativePath);

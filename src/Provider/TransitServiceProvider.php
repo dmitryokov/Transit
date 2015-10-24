@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.3.2';
+    const version = '1.3.3';
 
     /**
      * Registers the service provider
