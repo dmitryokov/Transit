@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.3.3';
+    const version = '1.3.4';
 
     /**
      * Registers the service provider
@@ -90,10 +90,13 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerCommands()
     {
-        $this->commands([
-            'Kenarkose\Transit\Console\CreateModelCommand',
-            'Kenarkose\Transit\Console\CreateMigrationCommand'
-        ]);
+        if ($this->app->runningInConsole())
+        {
+            $this->commands([
+                'Kenarkose\Transit\Console\CreateModelCommand',
+                'Kenarkose\Transit\Console\CreateMigrationCommand'
+            ]);
+        }
     }
 
 }
