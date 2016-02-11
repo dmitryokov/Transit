@@ -7,7 +7,29 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.3.4';
+    const version = '1.3.5';
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [
+            'path.upload',
+            'path.uploaded_asset',
+            'transit.upload',
+            'transit.download'
+        ];
+    }
 
     /**
      * Registers the service provider
@@ -90,13 +112,10 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerCommands()
     {
-        if ($this->app->runningInConsole())
-        {
-            $this->commands([
-                'Kenarkose\Transit\Console\CreateModelCommand',
-                'Kenarkose\Transit\Console\CreateMigrationCommand'
-            ]);
-        }
+        $this->commands([
+            'Kenarkose\Transit\Console\CreateModelCommand',
+            'Kenarkose\Transit\Console\CreateMigrationCommand'
+        ]);
     }
 
 }
