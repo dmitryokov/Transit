@@ -10,7 +10,7 @@
         "laravel",
         "laravel5"
     ],
-    "version": "1.3.5",
+    "version": "1.4.0",
     "authors": [
         {
             "name": "Hyleeh",
@@ -44,10 +44,5 @@
     "suggest": {
         "laravel/framework": "This package requires Laravel 5.",
         "kenarkose/ownable": "Allows ownership for Eloquent models on Laravel 5."
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.4-dev"
-        }
     }
 }

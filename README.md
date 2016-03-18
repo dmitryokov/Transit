@@ -7,7 +7,7 @@ Easy file uploading and downloading for Laravel 5.
 [![Latest Stable Version](https://poser.pugx.org/kenarkose/Transit/version)](https://packagist.org/packages/kenarkose/Transit)
 [![License](https://poser.pugx.org/kenarkose/Transit/license)](https://packagist.org/packages/kenarkose/Transit)
 ## Features
-- Compatible with Laravel 5.0 and 5.1
+- Compatible with Laravel 5
 - Clean API for uploading and downloading files
 - Automated(optional) validation while uploading files
 - Customization options for file storage, model and validation
@@ -23,7 +23,7 @@ Installing Transit is simple.
     ```js
     {
         "require": {
-            "kenarkose/transit": "1.3.*"
+            "kenarkose/transit": "~1.0"
         }
     }
     ```
