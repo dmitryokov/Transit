@@ -136,6 +136,28 @@ class UploadServiceTest extends TestBase {
         $this->assertFileExists($upload->path);
     }
 
+    /** @test */
+    function it_uploads_files_with_id()
+    {
+        $filePath = vfsStream::url('root_dir') . '/foo.txt';
+
+        $uploadedFile = new UploadedFile($filePath, 'foo.txt', null, null, null, true);
+
+        $upload = $this->uploadService->upload($uploadedFile, 1337);
+
+        $this->assertInstanceOf(
+            'Kenarkose\Transit\Contract\Uploadable',
+            $upload
+        );
+
+        $this->assertFileExists($upload->path);
+
+        $this->assertEquals(
+            1337,
+            $upload->getKey()
+        );
+    }
+
     function it_fails_uploading_files_with_invalid_extensions()
     {
         $filePath = vfsStream::url('root_dir') . '/bar.php';

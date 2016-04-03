@@ -151,16 +151,17 @@ class UploadService {
      * Uploads a file
      *
      * @param UploadedFile $uploadedFile
+     * @param int|null $id if the model should have specific id
      * @return Upload
      */
-    public function upload(UploadedFile $uploadedFile)
+    public function upload(UploadedFile $uploadedFile, $id = null)
     {
         if ($this->validatesUploadedFile())
         {
             $this->validateUploadedFile($uploadedFile);
         }
 
-        return $this->processUpload($uploadedFile);
+        return $this->processUpload($uploadedFile, $id);
     }
 
     /**
@@ -195,15 +196,16 @@ class UploadService {
 
     /**
      * @param UploadedFile $uploadedFile
+     * @param int|null $id
      * @return Upload
      */
-    protected function processUpload(UploadedFile $uploadedFile)
+    protected function processUpload(UploadedFile $uploadedFile, $id = null)
     {
         $uploadData = $this->prepareUploadData($uploadedFile);
 
         $uploadData['path'] = $this->moveUploadedFile($uploadedFile);
 
-        $upload = $this->saveUpload($uploadData);
+        $upload = $this->saveUpload($uploadData, $id);
 
         return $upload;
     }
@@ -286,11 +288,12 @@ class UploadService {
 
     /**
      * @param array $uploadData
+     * @param int|null $id
      * @return mixed
      */
-    protected function saveUpload(array $uploadData)
+    protected function saveUpload(array $uploadData, $id = null)
     {
-        $upload = $this->getNewUploadModel();
+        $upload = $this->getNewUploadModel($id);
 
         $upload->saveUploadData($uploadData);
 
@@ -300,9 +303,10 @@ class UploadService {
     /**
      * Creates a new upload model
      *
+     * @param int|null $id
      * @return mixed
      */
-    protected function getNewUploadModel()
+    protected function getNewUploadModel($id = null)
     {
         $uploadModel = $this->modelName();
 
@@ -311,6 +315,11 @@ class UploadService {
         if ( ! $upload instanceof Uploadable)
         {
             throw new RuntimeException('The upload model must implement the "Kenarkose\Transit\Contract\Uploadable" interface.');
+        }
+
+        if ($id)
+        {
+            $upload->setKey($id);
         }
 
         return $upload;
