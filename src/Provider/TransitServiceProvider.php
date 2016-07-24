@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '1.5.0';
+    const version = '2.0.0';
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -64,12 +64,17 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerUploadPath()
     {
-        $this->app['path.upload'] = $this->app->share(function ()
+        if ( ! $this->app->environment('production'))
         {
-            return ($configuredPath = config('transit.upload_path'))
-                ? public_path($configuredPath)
-                : public_path('upload');
-        });
+            // This is for model and migration templates
+            // we use blade engine to generate these files
+            $this->app['path.upload'] = $this->app->share(function ()
+            {
+                return ($configuredPath = config('transit.upload_path'))
+                    ? public_path($configuredPath)
+                    : public_path('upload');
+            });
+        }
     }
 
     /**
