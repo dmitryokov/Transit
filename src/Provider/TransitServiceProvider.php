@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TransitServiceProvider extends ServiceProvider {
 
-    const version = '2.0.1';
+    const version = '2.0.2';
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -50,13 +50,16 @@ class TransitServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        // This is for model and migration templates
-        // we use blade engine to generate these files
-        $this->loadViewsFrom(dirname(__DIR__) . '/resources/templates', '_transit');
+        if ( ! $this->app->environment('production'))
+        {
+            // This is for model and migration templates
+            // we use blade engine to generate these files
+            $this->loadViewsFrom(dirname(__DIR__) . '/resources/templates', '_transit');
 
-        $this->publishes([
-            dirname(__DIR__) . '/resources/config.php' => config_path('transit.php')
-        ]);
+            $this->publishes([
+                dirname(__DIR__) . '/resources/config.php' => config_path('transit.php')
+            ]);
+        }
     }
 
     /**
@@ -64,17 +67,12 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerUploadPath()
     {
-        if ( ! $this->app->environment('production'))
+        $this->app['path.upload'] = $this->app->share(function ()
         {
-            // This is for model and migration templates
-            // we use blade engine to generate these files
-            $this->app['path.upload'] = $this->app->share(function ()
-            {
-                return ($configuredPath = config('transit.upload_path'))
-                    ? public_path($configuredPath)
-                    : public_path('upload');
-            });
-        }
+            return ($configuredPath = config('transit.upload_path'))
+                ? public_path($configuredPath)
+                : public_path('upload');
+        });
     }
 
     /**
@@ -117,10 +115,13 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerCommands()
     {
-        $this->commands([
-            'Kenarkose\Transit\Console\CreateModelCommand',
-            'Kenarkose\Transit\Console\CreateMigrationCommand'
-        ]);
+        if ( ! $this->app->environment('production'))
+        {
+            $this->commands([
+                'Kenarkose\Transit\Console\CreateModelCommand',
+                'Kenarkose\Transit\Console\CreateMigrationCommand'
+            ]);
+        }
     }
 
 }
