@@ -17,6 +17,6 @@ class File extends Eloquent implements DownloadableContract, UploadableContract,
      *
      * @var array
      */
-    protected $fillable = ['extension', 'mimetype', 'size', 'name', 'path'];
+    protected $fillable = ['extension', 'mimetype', 'size', 'name', 'path', 'metadata'];
 
 }

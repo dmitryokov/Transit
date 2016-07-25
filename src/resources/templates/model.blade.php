@@ -12,6 +12,6 @@ class {{ $name }} extends TransitFile {
      *
      * @var array
      */
-    protected $fillable = ['extension', 'mimetype', 'size', 'name', 'path'];
+    protected $fillable = ['extension', 'mimetype', 'size', 'name', 'path', 'metadata'];
 
 }
