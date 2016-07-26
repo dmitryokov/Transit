@@ -20,6 +20,7 @@ class TransitCreateFilesTable extends Migration {
             $table->string('extension');
             $table->string('mimetype');
             $table->bigInteger('size')->unsigned();
+            $table->text('metadata')->default('{}');
 
             $table->timestamps();
         });

@@ -23,7 +23,7 @@ Installing Transit is simple.
     ```js
     {
         "require": {
-            "kenarkose/transit": "~2.0"
+            "kenarkose/transit": "~2.1"
         }
     }
     ```
