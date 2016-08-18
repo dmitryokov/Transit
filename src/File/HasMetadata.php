@@ -34,7 +34,7 @@ trait HasMetadata {
     {
         if (is_null($this->metadataCache))
         {
-            $this->metadataCache = json_decode($this->metadata);
+            $this->metadataCache = json_decode($this->metadata, true);
         }
 
         if (is_null($key))
