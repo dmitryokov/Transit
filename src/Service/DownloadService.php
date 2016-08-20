@@ -15,7 +15,7 @@ class DownloadService {
     {
         return response()->download(
             $file->getFilePath(),
-            $file->getFileName() . '.' . $file->getFileExtension(),
+            $file->getFileName(),
             $this->makeDownloadHeaders($file)
         );
     }
