@@ -2,7 +2,7 @@
 namespace Kenarkose\Transit\Console;
 
 
-use Illuminate\Console\DetectsApplicationNamespace
+use Illuminate\Console\DetectsApplicationNamespace;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
