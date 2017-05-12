@@ -2,13 +2,13 @@
 namespace Kenarkose\Transit\Console;
 
 
-use Illuminate\Console\AppNamespaceDetectorTrait;
+use Illuminate\Console\DetectsApplicationNamespace
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
 class CreateModelCommand extends Command {
 
-    use AppNamespaceDetectorTrait;
+    use DetectsApplicationNamespace;
 
     /**
      * The console command name.
