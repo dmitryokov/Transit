@@ -67,7 +67,7 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerUploadPath()
     {
-        $this->app['path.upload'] = $this->app->share(function ()
+        $this->app->singleton('path.upload', function ($app)
         {
             return ($configuredPath = config('transit.upload_path'))
                 ? public_path($configuredPath)
@@ -80,7 +80,7 @@ class TransitServiceProvider extends ServiceProvider {
      */
     protected function registerAssetPath()
     {
-        $this->app['path.uploaded_asset'] = $this->app->share(function ()
+        $this->app->singleton('path.uploaded_asset', function ($app)
         {
             return ($configuredPath = config('transit.upload_path'))
                 ? $configuredPath
